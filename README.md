@@ -24,7 +24,7 @@ nacos-datasource-plugin-ext工程主目录
 
 ## 二、下载和使用
 
-IDEA导入时导入nacos-datasource-plugin-ext这个目录即可。
+IDEA导入时导入nacos-datasource-plugin-ext这个目录作为根目录即可。
 
 ### 2.1、插件引入
 
@@ -68,7 +68,7 @@ db.pool.config.driverClassName=org.postgresql.Driver
 
 可参考nacos-postgresql-datasource-plugin-ext工程，新创建Maven项目，实现AbstractDatabaseDialect类，重写相关的分页操作逻辑与方法，并创建相应的mapper实现。
 
-目前对于Oracle、达梦数据库，仍然需要修改Nacos2.2的主分支代码，因为要兼容默认的命名空间ID为空的查询情况。
+目前对于Oracle、达梦数据库，仍然需要修改Nacos2.2的主分支代码，因为要兼容默认的命名空间ID为空的查询情况，社区官网未处理。
 
 个人后续等Nacos2.2发布后，进行Nacos主分支源码上关于Nacos的Oracle的兼容性适配，目前可以用Nacos2.1的改造代码进行处理。
 
