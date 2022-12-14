@@ -4,7 +4,7 @@
 
 ### 1.1、简介
 
-从Nacos2.2版本开始，Nacos提供了数据源扩展插件，以便让需要进行其他数据库适配的用户自己编写插件来保存数据。当前项目插件目前已简单适配Postgresql。
+从2022年12月14日发布的Nacos2.2正式版本开始，Nacos提供了数据源扩展插件，以便让需要进行其他数据库适配的用户自己编写插件来保存数据。当前项目插件目前已简单适配Postgresql。
 
 如需Nacos2.1支持，请移步个人的如下这个仓库，该仓库支持PostgreSQL、Oracle、达梦等。
 
@@ -70,5 +70,5 @@ db.pool.config.driverClassName=org.postgresql.Driver
 
 目前对于Oracle、达梦数据库，仍然需要修改Nacos2.2的主分支代码，因为要兼容默认的命名空间ID为空的查询情况，社区官网未处理。
 
-个人后续等Nacos2.2发布后，进行Nacos主分支源码上关于Nacos的Oracle的兼容性适配，目前可以用Nacos2.1的改造代码进行处理。
+最近有时间，将进行Nacos主分支源码上关于Nacos的Oracle的兼容性适配，目前可以用Nacos2.1的改造代码进行处理。
 

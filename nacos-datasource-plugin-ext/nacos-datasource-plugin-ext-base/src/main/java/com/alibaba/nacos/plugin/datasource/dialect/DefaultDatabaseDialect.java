@@ -22,7 +22,7 @@ import com.alibaba.nacos.plugin.datasource.constants.DatabaseTypeConstant;
  * mysql database dialect.
  * @author Long Yu
  */
-public class MysqlDatabaseDialect extends AbstractDatabaseDialect {
+public class DefaultDatabaseDialect extends AbstractDatabaseDialect {
 
     @Override
     public String getType() {
