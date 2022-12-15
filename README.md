@@ -1,12 +1,12 @@
-# Nacos数据库适配插件
+# Nacos2.2版本数据库适配插件
 
 ## 一、插件概述
 
 ### 1.1、简介
 
-从2022年12月14日发布的Nacos2.2正式版本开始，Nacos提供了数据源扩展插件，以便让需要进行其他数据库适配的用户自己编写插件来保存数据。当前项目插件目前已简单适配Postgresql。
+从2022年12月14日发布的Nacos2.2正式版本开始，Nacos提供了数据源扩展插件，以便让需要进行其他数据库适配的用户自己编写插件来保存数据。当前项目插件目前已简单适配Postgresql，并抽象了一套常见的兼容项的方言类，开发者可以基于该设计，实现自定义分页逻辑即可。
 
-如需Nacos2.1支持，请移步个人的如下这个仓库，该仓库支持PostgreSQL、Oracle、达梦等。
+如需Nacos2.1支持，请移步个人之前创建这个仓库，该仓库目前支持PostgreSQL、Oracle、达梦，简单的操作基本可以实现。
 
 https://github.com/wuchubuzai2018/nacos-multidatasource
 
@@ -28,7 +28,7 @@ IDEA导入时导入nacos-datasource-plugin-ext这个目录作为根目录即可�
 
 ### 2.1、插件引入
 
-**方式一：**
+**方式一：源码方式**
 
 使用postgresql作为依赖引入到Nacos主分支源码中，使用Maven提前将当前工程Install到Maven仓库，然后在Pom.xml中引入如下依赖：
 
@@ -42,9 +42,9 @@ IDEA导入时导入nacos-datasource-plugin-ext这个目录作为根目录即可�
 
 或引入all模块。
 
-**方式二：**
+**方式二：打包形式引入**
 
-下载当前插件项目源码，打包为jar包，将该文件的路径配置到startup.sh文件中，使用Nacos的loader.path机制指定该插件的路径，可修改startup.sh中的loader.path参数的位置进行指定，打包插件可选择nacos-postgresql-datasource-plugin-ext打包即可。
+在Nacos2.2的发布包环境下，下载当前插件项目源码，打包为jar包，将该文件的路径配置到startup.sh文件中，使用Nacos的loader.path机制指定该插件的路径，可修改startup.sh中的loader.path参数的位置进行指定，打包插件可选择nacos-postgresql-datasource-plugin-ext打包即可。
 
 ### 2.2、修改数据库配置文件
 
@@ -66,7 +66,7 @@ db.pool.config.driverClassName=org.postgresql.Driver
 
 ## 三、其他数据库插件开发
 
-可参考nacos-postgresql-datasource-plugin-ext工程，新创建Maven项目，实现AbstractDatabaseDialect类，重写相关的分页操作逻辑与方法，并创建相应的mapper实现。
+可参考nacos-postgresql-datasource-plugin-ext工程，新创建Maven项目，实现AbstractDatabaseDialect类，重写相关的分页操作逻辑与方法，并创建相应的mapper实现，减少了适配的成本。
 
 目前对于Oracle、达梦数据库，仍然需要修改Nacos2.2的主分支代码，因为要兼容默认的命名空间ID为空的查询情况，社区官网未处理。
 
