@@ -44,7 +44,7 @@ IDEA导入时导入nacos-datasource-plugin-ext这个目录作为根目录即可�
 
 **方式二：打包形式引入**
 
-在Nacos2.2的发布包环境下，下载当前插件项目源码，打包为jar包，将该文件的路径配置到startup.sh文件中，使用Nacos的loader.path机制指定该插件的路径，可修改startup.sh中的loader.path参数的位置进行指定，打包插件可选择nacos-postgresql-datasource-plugin-ext打包即可。
+在Nacos2.2的发布包环境下，下载当前插件项目源码，打包为jar包，将该文件放到nacos主目录下的plugins文件夹中，默认会使用Nacos的loader.path机制指定该插件的路径，打包插件可选择nacos-postgresql-datasource-plugin-ext打包即可。postgresql模块的打包默认会包含postgresql的jdbc驱动类和base依赖。
 
 ### 2.2、修改数据库配置文件
 
@@ -71,4 +71,3 @@ db.pool.config.driverClassName=org.postgresql.Driver
 目前对于Oracle、达梦数据库，仍然需要修改Nacos2.2的主分支代码，因为要兼容默认的命名空间ID为空的查询情况，社区官网未处理。
 
 最近有时间，将进行Nacos主分支源码上关于Nacos的Oracle的兼容性适配，目前可以用Nacos2.1的改造代码进行处理。
-
