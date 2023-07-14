@@ -25,17 +25,25 @@ import com.alibaba.nacos.plugin.datasource.impl.mysql.HistoryConfigInfoMapperByM
  * @author Long Yu
  **/
 public class HistoryConfigInfoMapperByPostgresql extends HistoryConfigInfoMapperByMySql {
-    
-    @Override
-    public String removeConfigHistory() {
-        String sql = "WITH temp_table as (SELECT id FROM his_config_info WHERE gmt_modified < ? LIMIT ? ) " +
-                "DELETE FROM his_config_info WHERE id in (SELECT id FROM temp_table) ";
-        return sql;
-    }
-    
-    @Override
-    public String getDataSource() {
-        return DatabaseTypeConstant.POSTGRESQL;
-    }
-    
+
+  @Override
+  public String removeConfigHistory() {
+    String sql = "WITH temp_table as (SELECT id FROM his_config_info WHERE gmt_modified < ? LIMIT ? ) " +
+        "DELETE FROM his_config_info WHERE id in (SELECT id FROM temp_table) ";
+    return sql;
+  }
+
+  @Override
+  public String pageFindConfigHistoryFetchRows(int pageNo, int pageSize) {
+    final int offset = (pageNo - 1) * pageSize;
+    final int limit = pageSize;
+    return "SELECT nid,data_id,group_id,tenant_id,app_name,src_ip,src_user,op_type,gmt_create,gmt_modified FROM his_config_info "
+        + "WHERE data_id = ? AND group_id = ? AND tenant_id = ? ORDER BY nid DESC OFFSET " + offset + " LIMIT " + limit;
+  }
+
+  @Override
+  public String getDataSource() {
+    return DatabaseTypeConstant.POSTGRESQL;
+  }
+
 }
